@@ -1,0 +1,132 @@
+<!DOCTYPE>
+<title>Happy Birthday</title>
+<div class="input-wrapper">
+<input
+  id="ratsInput"
+  type="text"
+  name="name"
+  value="michael"
+>
+</div>
+<audio
+  id="ratsIntro"
+  src="ratsIntro.mp3"
+  type="audio/mp3"
+></audio>
+<audio
+  id="ratsName"
+  src="http://tts-api.com/tts.mp3?q=michael"
+  type="audio/mp3"
+></audio>
+<audio
+  id="ratsCakeAndIcecream"
+  src="ratsCakeAndIcecream.mp3"
+  type="audio/mp3"
+></audio>
+<audio
+  id="ratsSuchAGoodBoy"
+  src="ratsSuchAGoodBoy.mp3"
+  type="audio/mp3"
+></audio>
+<video autoplay loop>
+  <source src="rats.mp4" type="video/mp4">
+</video>
+<style>
+  body {
+    padding: 0;
+    margin: 0;
+  }
+
+  video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+  }
+
+  .input-wrapper{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+  }
+
+  .input-wrapper:hover input {
+    opacity: 1;
+    transform: translateY(0%);
+    transition: transform .15s, opacity .15s;
+  }
+
+  input {
+    font-size: 4em;
+    text-align: center;
+    width: 100%;
+    padding: 1em;
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: transform 1s, opacity 1s;
+  }
+</style>
+<script>
+  var name = window.location.hash.slice(1) || 'michael';
+  var ratsIntro = document.getElementById('ratsIntro');
+  var ratsName = document.getElementById('ratsName');
+  var ratsCakeAndIcecream = document.getElementById('ratsCakeAndIcecream');
+  var ratsSuchAGoodBoy = document.getElementById('ratsSuchAGoodBoy');
+  var ratsInput = document.getElementById('ratsInput');
+
+  function setName(){
+    name = ratsInput.value;
+    window.location.hash = name;
+  }
+
+  function setNameAudio(){
+    name = ratsInput.value;
+    newSrc = 'http://tts-api.com/tts.mp3?q=' + name;
+    if(newSrc === ratsName.src){
+      return;
+    }
+    ratsName.src = newSrc;
+    ratsName.playbackRate = 1.5;
+  };
+
+  ratsInput.addEventListener('change', setName);
+  ratsInput.addEventListener('keyup', setName);
+
+  ratsInput.value = name;
+  window.document.title = name + ' it\'s your birthday today';
+  setNameAudio();
+
+  ratsIntro.play();
+  var firstTryTho = true;
+
+  ratsIntro.addEventListener('ended', function(){
+    ratsName.play();
+  });
+
+  ratsName.addEventListener('ended', function(){
+    setNameAudio();
+
+    if(firstTryTho){
+      ratsCakeAndIcecream.play();
+    } else {
+      ratsSuchAGoodBoy.play();
+    }
+    firstTryTho = !firstTryTho;
+  });
+
+  ratsCakeAndIcecream.addEventListener('ended', function(){
+    ratsName.play();
+  });
+
+  ratsSuchAGoodBoy.addEventListener('ended', function(){
+    ratsIntro.play();
+  });
+</script>
