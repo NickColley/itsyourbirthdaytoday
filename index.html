@@ -75,7 +75,7 @@
   }
 </style>
 <script>
-  var name = window.location.hash.slice(1) || 'michael';
+  var name = decodeURIComponent(window.location.hash.slice(1)) || 'michael';
   var ratsIntro = document.getElementById('ratsIntro');
   var ratsName = document.getElementById('ratsName');
   var ratsCakeAndIcecream = document.getElementById('ratsCakeAndIcecream');
@@ -84,7 +84,7 @@
 
   function setName(){
     name = ratsInput.value;
-    window.location.hash = name;
+    window.location.hash = encodeURIComponent(name);
   }
 
   function setNameAudio(){
