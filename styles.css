@@ -1,0 +1,73 @@
+*::before,
+*,
+*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body{
+    width: 100%;
+    height: 100%:
+}
+
+.video{
+    z-index: -100;
+    position: fixed;
+    top: 50%; left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.input-wrapper{
+    position: absolute;
+    top: 0; left: 0; right: 0;
+}
+
+.input-wrapper:hover input{
+    opacity: 1;
+    transform: translateY(0%);
+    transition: transform .15s, opacity .15s;
+}
+
+input{
+    width: 100%;
+    padding: 1em;
+
+    text-align: center;
+    font-size: 4em;
+
+    opacity: 0;
+
+    transform: translateY(-100%);
+    transition: transform 1s, opacity 1s;
+}
+
+button{
+    position: absolute;
+    top: 0%; bottom: 0%;
+    width: 100%;
+    margin: 0 auto;
+    padding: .5em;
+
+    color: white;
+    font-weight: bold;
+    font-size: 4em;
+    text-align: center;
+
+    background: rgba(0,0,0,.95);
+    transition: opacity 1s, background .15s;
+}
+
+button:hover{
+    background: rgba(0,0,0,.75);
+    cursor: pointer;
+}
+
+button:active{
+    background: rgba(0,0,0,.5);
+}
