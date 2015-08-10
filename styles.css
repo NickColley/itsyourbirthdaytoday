@@ -9,7 +9,7 @@
 html,
 body{
     width: 100%;
-    height: 100%:
+    height: 100%;
 }
 
 .video{
@@ -20,7 +20,9 @@ body{
     min-height: 100%;
     width: auto;
     height: auto;
-    transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+        -ms-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
 }
 
 .input-wrapper{
@@ -30,8 +32,11 @@ body{
 
 .input-wrapper:hover input{
     opacity: 1;
-    transform: translateY(0%);
-    transition: transform .15s, opacity .15s;
+    -webkit-transform: translateY(0%);
+        -ms-transform: translateY(0%);
+            transform: translateY(0%);
+    -webkit-transition: -webkit-transform .15s, opacity .15s;
+            transition: transform .15s, opacity .15s;
 }
 
 input{
@@ -43,8 +48,13 @@ input{
 
     opacity: 0;
 
-    transform: translateY(-100%);
-    transition: transform 1s, opacity 1s;
+    -webkit-transform: translateY(-100%);
+
+        -ms-transform: translateY(-100%);
+
+            transform: translateY(-100%);
+    -webkit-transition: -webkit-transform 1s, opacity 1s;
+            transition: transform 1s, opacity 1s;
 }
 
 button{
@@ -60,7 +70,8 @@ button{
     text-align: center;
 
     background: rgba(0,0,0,.95);
-    transition: opacity 1s, background .15s;
+    -webkit-transition: opacity 1s, background .15s;
+            transition: opacity 1s, background .15s;
 }
 
 button:hover{
@@ -90,7 +101,8 @@ button:active{
     background-color: black;
 
     opacity: .25;
-    transition: opacity .25s;
+    -webkit-transition: opacity .25s;
+            transition: opacity .25s;
 }
 
 .original a:hover{
