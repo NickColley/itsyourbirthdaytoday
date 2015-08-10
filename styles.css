@@ -71,3 +71,28 @@ button:hover{
 button:active{
     background: rgba(0,0,0,.5);
 }
+
+.original{
+    z-index: -5;
+    position: fixed;
+    padding: 1em;
+    bottom: 0;
+    width: 100%;
+}
+
+.original a{
+    float: right;
+    padding: .25em;
+
+    color: white;
+    font-family: sans-serif;
+
+    background-color: black;
+
+    opacity: .25;
+    transition: opacity .25s;
+}
+
+.original a:hover{
+    opacity: .85;
+}
