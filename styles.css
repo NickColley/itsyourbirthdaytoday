@@ -25,6 +25,39 @@ body{
             transform: translateX(-50%) translateY(-50%);
 }
 
+@media (max-width: 450px){
+    .video{
+        -webkit-animation: videoMove 10s ease-in-out infinite;
+                animation: videoMove 10s ease-in-out infinite;
+    }
+}
+
+@-webkit-keyframes videoMove{
+    25%{
+        -webkit-transform: translateX(-25%) translateY(-50%);
+            -ms-transform: translateX(-25%) translateY(-50%);
+                transform: translateX(-25%) translateY(-50%);
+    }
+    75%{
+        -webkit-transform: translateX(-75%) translateY(-50%);
+            -ms-transform: translateX(-75%) translateY(-50%);
+                transform: translateX(-75%) translateY(-50%);
+    }
+}
+
+@keyframes videoMove{
+    25%{
+        -webkit-transform: translateX(-25%) translateY(-50%);
+            -ms-transform: translateX(-25%) translateY(-50%);
+                transform: translateX(-25%) translateY(-50%);
+    }
+    75%{
+        -webkit-transform: translateX(-75%) translateY(-50%);
+            -ms-transform: translateX(-75%) translateY(-50%);
+                transform: translateX(-75%) translateY(-50%);
+    }
+}
+
 .input-wrapper{
     position: absolute;
     top: 0; left: 0; right: 0;
