@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>its your birthday today</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+      // In the head so it executes quicker
+      // Redirect github link to the new domain.
+      if(window.location.origin.indexOf('github') !== -1){
+        var redirectHref = window.location.href.replace(window.location.origin, 'http://itsyourbirthday.today');
+        window.location.replace(redirectHref);
+      }
+    </script>
 </head>
 <body>
 
