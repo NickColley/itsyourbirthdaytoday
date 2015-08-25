@@ -153,15 +153,21 @@
         voice = voices[3],
         speed = 0,
         pitch = 0,
-        apiKey = '34b06ef0ba220c09a817fe7924575123',
+        apiKey = '34b06ef0ba220c09a817fe7924575123';
 
-        newSrc = 'https://api.ispeech.org/api/rest' +
-                 '?apikey=' + apiKey +
-                 '&action=convert' +
-                 '&voice=' + voice +
-                 '&speed=' + speed +
-                 '&pitch=' + pitch +
-                 '&text=' + name;
+        if( name.indexOf("😽") !== -1  ){
+            voice = 'jpjapanesefemale';
+            speed = -10;
+            pitch = 150;
+        }
+
+        var newSrc = 'https://api.ispeech.org/api/rest' +
+                     '?apikey=' + apiKey +
+                     '&action=convert' +
+                     '&voice=' + voice +
+                     '&speed=' + speed +
+                     '&pitch=' + pitch +
+                     '&text=' + name;
 
         if(newSrc === ratsName.src){
             return;
