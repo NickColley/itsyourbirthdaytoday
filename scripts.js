@@ -150,7 +150,7 @@
             'cafrenchfemale',
             'cafrenchmale'
         ],
-        voice = voices[getRandomIntInclusive(0, voices.length-1)],
+        voice = voices[3],
         speed = 0,
         pitch = 0,
         apiKey = '34b06ef0ba220c09a817fe7924575123',
