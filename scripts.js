@@ -105,12 +105,39 @@
 
     function setNameAudio(){
         name = ratsInput.value;
-        newSrc = 'http://tts-api.com/tts.mp3?q=' + name;
+
+        var voices = [
+            'usenglishfemale',
+            'usenglishfemale2',
+            'usenglishmale',
+            'usenglishmale2',
+            'ukenglishfemale',
+            'ukenglishfemale2',
+            'ukenglishmale',
+            'auenglishfemale'
+        ],
+        voice = voices[getRandomIntInclusive(0, voices.length-1)],
+        speed = 0,
+        pitch = 0,
+        apiKey = '34b06ef0ba220c09a817fe7924575123',
+
+        newSrc = 'https://api.ispeech.org/api/rest' +
+                 '?apikey=' + apiKey +
+                 '&action=convert' +
+                 '&voice=' + voice +
+                 '&speed=' + speed +
+                 '&pitch=' + pitch +
+                 '&text=' + name;
+
         if(newSrc === ratsName.src){
             return;
         }
         ratsName.src = newSrc;
         ratsName.playbackRate = 1.5;
+    }
+
+    function getRandomIntInclusive(min, max){
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
 })();
