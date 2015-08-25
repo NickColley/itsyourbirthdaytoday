@@ -106,6 +106,10 @@
     function setNameAudio(){
         name = ratsInput.value;
 
+        if( name === '' ){
+            name = 'michael';
+        }
+
         var voices = [
             'usenglishfemale',
             'usenglishfemale2',
