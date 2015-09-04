@@ -165,6 +165,11 @@
             pitch = 150;
         }
 
+        // G'day mate
+        if( name.indexOf("🐨") !== -1 ){
+            voice = 'auenglishfemale';
+        }
+
         var newSrc = 'https://api.ispeech.org/api/rest' +
                      '?apikey=' + apiKey +
                      '&action=convert' +
