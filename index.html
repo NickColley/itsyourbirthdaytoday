@@ -9,7 +9,7 @@
       // In the head so it executes quicker
       // Redirect github link to the new domain.
       if(window.location.origin.indexOf('github') !== -1){
-        var redirectHref = window.location.href.replace(window.location.origin + '/itsyourbirthdaytoday', 'http://itsyourbirthday.today');
+        var redirectHref = 'http://itsyourbirthday.today/' + window.location.hash;
         window.location.replace(redirectHref);
       }
     </script>
