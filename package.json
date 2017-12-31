@@ -1,0 +1,29 @@
+{
+  "name": "itsyourbirthdaytoday",
+  "version": "1.0.0",
+  "description": "![Family dancing to their favourite Rats song](http://itsyourbirthday.today/rats.gif)",
+  "main": "scripts.js",
+  "scripts": {
+    "build:js": "uglifyjs scripts.js --compress --mangle --output scripts.min.js",
+    "build:css": "cleancss --output styles.min.css styles.css",
+    "build": "npm run build:js && npm run build:css",
+    "start": "serve ./",
+    "prestart": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nickcolley/itsyourbirthdaytoday.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nickcolley/itsyourbirthdaytoday/issues"
+  },
+  "homepage": "https://github.com/nickcolley/itsyourbirthdaytoday#readme",
+  "dependencies": {
+    "clean-css-cli": "^4.1.10",
+    "serve": "^6.4.3",
+    "uglify-js": "^3.3.4",
+    "watch": "^1.0.2"
+  }
+}

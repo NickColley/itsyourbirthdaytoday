@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>its your birthday today</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.min.css">
     <script>
       // In the head so it executes quicker
       // Redirect github link to the new domain.
@@ -15,25 +15,29 @@
     </script>
 </head>
 <body>
-
     <div class="input-wrapper">
         <input id="ratsInput" type="text" name="name" value="michael" />
     </div>
 
     <button style="display: none;">press to play your birthday message</button>
 
-    <audio id="ratsIntro" src="tunes/ratsIntro.mp3" type="audio/mp3"></audio>
-    <audio id="ratsName" src="tunes/michael.mp3" type="audio/mp3"></audio>
-    <audio id="ratsCakeAndIcecream" src="tunes/ratsCakeAndIcecream.mp3" type="audio/mp3"></audio>
-    <audio id="ratsSuchAGoodBoy" src="tunes/ratsSuchAGoodBoy.mp3" type="audio/mp3"></audio>
+    <audio id="ratsIntro" src="tunes/ratsIntro.mp3" type="audio/mp3" preload></audio>
+    <audio id="ratsName" src="tunes/ratsName.mp3" type="audio/mp3" preload></audio>
+    <audio id="ratsCakeAndIcecream" src="tunes/ratsCakeAndIcecream.mp3" type="audio/mp3" preload></audio>
+    <audio id="ratsSuchAGoodBoy" src="tunes/ratsSuchAGoodBoy.mp3" type="audio/mp3" preload></audio>
 
     <img class="video" src="rats.gif" alt="Family dancing to son's happy birthday song"/>
 
-    <div class="original">
-        <a href="https://www.youtube.com/watch?v=mNy9HIo3shs">bless you jerma <3</a>
+    <div class="links">
+        <span>
+            made by <a href="https://twitter.com/nickcolley">Nick</a> & <a href="https://zaccolley.com">Zac</a>
+        </span>
+        <span>
+            <a href="https://www.youtube.com/watch?v=mNy9HIo3shs">bless you jerma <3</a>
+        </span>
     </div>
 
-    <script src="scripts.js"></script>
+    <script src="scripts.min.js"></script>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
