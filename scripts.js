@@ -85,6 +85,12 @@
 
     window.location.hash = encodeURIComponent(name)
     window.document.title = name + ' it\'s your birthday today'
+
+    var isPlaying = !ratsName.paused || !!ratsName.currentTime
+
+    if (!isPlaying) {
+      setNameAudio()
+    }
   }
 
   function setNameAudio () {
