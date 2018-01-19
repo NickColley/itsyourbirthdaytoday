@@ -1,6 +1,92 @@
 // on load
 (function () {
-  var name = decodeURIComponent(window.location.hash.slice(1)) || 'michael'
+  /*
+
+    Warning. There is a list of blocked words in this document.
+    This is to curb any abuse of the site. Or at least try.
+    If it doesn't work I'll delete it.
+
+    They're lots of slurs, if you'd prefer not read this leave now.
+
+  */
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+
+  var DEFAULT_NAME = 'michael'
+
+  var BLOCKED_TEXT = [
+    'beaner',
+    'beaners',
+    'bimbos',
+    'bulldyke',
+    'coon',
+    'darkie',
+    'faggot',
+    'fucktard',
+    'fudge packer',
+    'fudgepacker',
+    'jail bait',
+    'jailbait',
+    'jigaboo',
+    'jiggaboo',
+    'jiggerboo',
+    'kike',
+    'lolita',
+    'nambla',
+    'negro',
+    'nigga',
+    'nigger',
+    'nig nog',
+    'paki',
+    'raghead',
+    'rape',
+    'slave',
+    'shemale',
+    'slanteye',
+    'towelhead',
+    'tranny'
+  ]
+
+  function removeBlockedWords (text) {
+    var foundBlockedText = false
+
+    for (var i = 0; i < BLOCKED_TEXT.length; i++) {
+      var blockedTextItem = BLOCKED_TEXT[i]
+      var matchedBlockedTextItem = text.indexOf(blockedTextItem) !== -1
+
+      if (matchedBlockedTextItem) {
+        foundBlockedText = true
+        break
+      }
+    }
+
+    return foundBlockedText ? DEFAULT_NAME : text
+  }
+
+  var hashName = decodeURIComponent(window.location.hash.slice(1))
+  var name = removeBlockedWords(hashName || DEFAULT_NAME)
 
   var ratsIntro = document.getElementById('ratsIntro')
   var ratsName = document.getElementById('ratsName')
@@ -77,7 +163,7 @@
       return
     }
 
-    name = ratsInput.value
+    name = removeBlockedWords(ratsInput.value)
 
     if (name === '') {
       name = 'michael'
