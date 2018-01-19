@@ -74,7 +74,7 @@
 
     for (var i = 0; i < BLOCKED_TEXT.length; i++) {
       var blockedTextItem = BLOCKED_TEXT[i]
-      var matchedBlockedTextItem = text.indexOf(blockedTextItem) !== -1
+      var matchedBlockedTextItem = text.toLowerCase().indexOf(blockedTextItem) !== -1
 
       if (matchedBlockedTextItem) {
         foundBlockedText = true
