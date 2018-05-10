@@ -152,12 +152,6 @@
   setName()
   setNameAudio()
 
-  if (window.innerWidth < 450) {
-    ratsButton.style.display = 'block'
-  } else {
-    ratsIntro.play()
-  }
-
   function setName () {
     if (ratsInput.value === name) {
       return
