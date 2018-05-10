@@ -121,8 +121,7 @@
   })
 
   ratsIntro.addEventListener('playing', function () {
-    ratsButton.style.opacity = '0'
-    ratsButton.style.transofrm = 'scale(0)'
+    ratsButton.style.display = 'none'
   })
 
   ratsIntro.addEventListener('ended', function () {
