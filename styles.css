@@ -119,6 +119,7 @@ button:active {
 }
 
 .links {
+  text-align: right;
   position: fixed;
   padding: 1em;
   bottom: 0;
@@ -126,7 +127,7 @@ button:active {
 }
 
 .links span {
-  float: right;
+  display: inline-block;
   padding: .25em;
   margin-left: .25em;
 
