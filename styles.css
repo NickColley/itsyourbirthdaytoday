@@ -58,6 +58,9 @@ input {
 
   text-align: center;
   font-size: 4em;
+  border: 0;
+  border-radius: 0;
+  background: white;
 }
 
 label,
@@ -77,14 +80,20 @@ input:focus {
   transition: transform .15s, opacity .15s;
 }
 
+input:focus {
+  outline: none;
+  border-bottom: 4px solid orangered;
+}
+
 label {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
   position: absolute;
-  top: 5px;
-  left: 10px;
-  color: black;
-  font-family: sans-serif;
-  font-size: 20px;
-  font-weight: bold;
+  width: 1px;
 }
 
 button {
