@@ -69,6 +69,19 @@
     'tranny'
   ]
 
+  // https://github.com/remy/remysharp.com/blob/master/public/blog/throttling-function-calls.md
+  function debounce (fn, delay) {
+    var timer = null
+    return function () {
+      var context = this
+      var args = arguments
+      clearTimeout(timer)
+      timer = setTimeout(function () {
+        fn.apply(context, args)
+      }, delay)
+    }
+  }
+
   function removeBlockedWords (text) {
     var foundBlockedText = false
 
@@ -102,7 +115,7 @@
 
   ratsInput.value = name
   ratsInput.addEventListener('change', setName)
-  ratsInput.addEventListener('keyup', setName)
+  ratsInput.addEventListener('keyup', debounce(setName, 200))
 
   ratsButton.addEventListener('click', function () {
     ratsIntro.play()
@@ -190,6 +203,10 @@
                  '&speed=' + speed +
                  '&pitch=' + pitch +
                  '&text=' + name
+
+    if (ratsName.src === src) {
+      return
+    }
 
     ratsName.src = src
   }
