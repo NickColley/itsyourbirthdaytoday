@@ -196,7 +196,7 @@
     var pitch = 0
     var apiKey = '34b06ef0ba220c09a817fe7924575123'
 
-    var src = 'http://api.ispeech.org/api/rest' +
+    var src = 'https://api.ispeech.org/api/rest' +
                  '?apikey=' + apiKey +
                  '&action=convert' +
                  '&voice=' + voice +
