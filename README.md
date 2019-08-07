@@ -1,6 +1,6 @@
-# [itsyourbirthday.today](http://itsyourbirthday.today)
+# [itsyourbirthday.today](https://itsyourbirthday.today)
 
-![Family dancing to their favourite Rats song](http://itsyourbirthday.today/rats.gif)
+![Family dancing to their favourite Rats song](https://itsyourbirthday.today/rats.gif)
 
 ## install
 
