@@ -100,6 +100,13 @@
 
   var hashName = decodeURIComponent(window.location.hash.slice(1))
   var name = removeBlockedWords(hashName || DEFAULT_NAME)
+  var nameToSay
+  var speechHasErrored = false
+  var speechHasStarted = false
+  var hasSpeechSupport = (
+    ('speechSynthesis' in window) &&
+    ('SpeechSynthesisUtterance' in window)
+  )
 
   var ratsIntro = document.getElementById('ratsIntro')
   var ratsName = document.getElementById('ratsName')
@@ -111,7 +118,7 @@
 
   var firstTry = true
 
-  ratsName.playbackRate = 1.5
+  ratsName.playbackRate = 1.25
 
   ratsInput.value = name
   ratsInput.addEventListener('change', setName)
@@ -138,23 +145,13 @@
   })
 
   ratsIntro.addEventListener('ended', function () {
-    ratsName.play()
+    sayRatsName()
   })
 
-  ratsName.addEventListener('ended', function () {
-    setNameAudio()
-
-    if (firstTry) {
-      ratsCakeAndIcecream.play()
-    } else {
-      ratsSuchAGoodBoy.play()
-    }
-
-    firstTry = !firstTry
-  })
+  ratsName.addEventListener('ended', handleRatsNameEnd)
 
   ratsCakeAndIcecream.addEventListener('ended', function () {
-    ratsName.play()
+    sayRatsName()
   })
 
   ratsSuchAGoodBoy.addEventListener('ended', function () {
@@ -162,7 +159,7 @@
   })
 
   setName()
-  setNameAudio()
+  setNameToSay()
 
   function setName () {
     if (ratsInput.value === name) {
@@ -172,42 +169,61 @@
     name = removeBlockedWords(ratsInput.value)
 
     if (name === '') {
-      name = 'michael'
+      name = DEFAULT_NAME
     }
 
     window.location.hash = encodeURIComponent(name)
     window.document.title = name + ' it\'s your birthday today'
+  }
 
-    var isPlaying = !ratsName.paused || !!ratsName.currentTime
+  function handleRatsNameEnd () {
+    if (firstTry) {
+      ratsCakeAndIcecream.play()
+    } else {
+      ratsSuchAGoodBoy.play()
+    }
 
-    if (!isPlaying) {
-      setNameAudio()
+    firstTry = !firstTry
+  }
+
+  function setNameToSay () {
+    if (!hasSpeechSupport) {
+      return
+    }
+    nameToSay = new window.SpeechSynthesisUtterance(name)
+    nameToSay.pitch = 0.8
+    nameToSay.rate = 1.25
+    nameToSay.lang = 'en-US'
+
+    speechHasStarted = false
+    nameToSay.onstart = function () {
+      speechHasStarted = true
+    }
+    nameToSay.onend = function () {
+      if (!speechHasErrored) {
+        handleRatsNameEnd()
+      }
+    }
+    nameToSay.onerror = function () {
+      speechHasErrored = true
+      sayRatsName()
     }
   }
 
-  function setNameAudio () {
-    if (name === 'michael') {
-      ratsName.src = 'tunes/ratsName.mp3'
+  function sayRatsName () {
+    if (name === DEFAULT_NAME || !hasSpeechSupport || !nameToSay || speechHasErrored) {
+      ratsName.play()
       return
     }
-
-    var voice = 'usenglishmale2'
-    var speed = 0
-    var pitch = 0
-    var apiKey = '34b06ef0ba220c09a817fe7924575123'
-
-    var src = 'https://api.ispeech.org/api/rest' +
-                 '?apikey=' + apiKey +
-                 '&action=convert' +
-                 '&voice=' + voice +
-                 '&speed=' + speed +
-                 '&pitch=' + pitch +
-                 '&text=' + name
-
-    if (ratsName.src === src) {
-      return
-    }
-
-    ratsName.src = src
+    setNameToSay()
+    window.speechSynthesis.speak(nameToSay)
+    // If the speech api times out, then fallback to the regular sound.
+    setTimeout(function () {
+      if (!speechHasStarted) {
+        console.log('timedout')
+        speechHasErrored = true
+        sayRatsName()
+      }
+    }, 1000)
   }
 })()
