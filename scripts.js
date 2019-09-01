@@ -220,10 +220,9 @@
     // If the speech api times out, then fallback to the regular sound.
     setTimeout(function () {
       if (!speechHasStarted) {
-        console.log('timedout')
         speechHasErrored = true
         sayRatsName()
       }
-    }, 1000)
+    }, 3000)
   }
 })()
