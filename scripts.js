@@ -125,6 +125,9 @@
   ratsInput.addEventListener('keyup', debounce(setName, 200))
 
   ratsButton.addEventListener('click', function () {
+    window.requestAnimationFrame(animate)
+    video.play()
+
     ratsIntro.play()
 
     ratsName.play()
@@ -226,3 +229,24 @@
     }, 3000)
   }
 })()
+
+var video = document.createElement('video')
+video.src = 'rats.mp4'
+
+var canvas = document.getElementById('canvas')
+var ctx = canvas.getContext('2d')
+function animate () {
+  ctx.imageSmoothingEnabled = false // disabling image smoothing makes it look much nicer in my opinion
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+  window.requestAnimationFrame(animate)
+}
+
+video.onended = videoRepeat // repeat the video
+function videoRepeat () {
+  window.requestAnimationFrame(animate)
+  video.play()
+}
+
+window.onload = function () { // have to draw one frame at the start before the users clicks
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+}
