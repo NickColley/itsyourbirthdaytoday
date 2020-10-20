@@ -108,54 +108,71 @@
     ('SpeechSynthesisUtterance' in window)
   )
 
-  var ratsIntro = document.getElementById('ratsIntro')
-  var ratsName = document.getElementById('ratsName')
-  var ratsCakeAndIcecream = document.getElementById('ratsCakeAndIcecream')
-  var ratsSuchAGoodBoy = document.getElementById('ratsSuchAGoodBoy')
+  var ratsIntro
+  var ratsName
+  var ratsCakeAndIcecream
+  var ratsSuchAGoodBoy
+  var ratsSprite = new window.Howl({
+    src: ['rats.mp3'],
+    sprite: {
+      ratsIntro: [0, 7600],
+      ratsName: [7600, 550],
+      ratsCakeAndIcecream: [8150, 3600],
+      ratsSuchAGoodBoy: [12200, (3700 - 250)]
+    }
+  })
 
   var ratsInput = document.querySelector('input')
   var ratsButton = document.querySelector('button')
 
   var firstTry = true
 
-  ratsName.playbackRate = 1.25
-
   ratsInput.value = name
   ratsInput.addEventListener('change', setName)
   ratsInput.addEventListener('keyup', debounce(setName, 200))
 
   ratsButton.addEventListener('click', function () {
-    ratsIntro.play()
+    // Play and pause sprites so we can get their IDs.
+    ratsSprite.mute(true)
+    ratsIntro = ratsSprite.play('ratsIntro')
+    ratsSprite.pause(ratsIntro)
 
-    ratsName.play()
-    ratsName.pause()
+    ratsName = ratsSprite.play('ratsName')
+    ratsSprite.pause(ratsName)
 
-    ratsCakeAndIcecream.play()
-    ratsCakeAndIcecream.pause()
+    ratsCakeAndIcecream = ratsSprite.play('ratsCakeAndIcecream')
+    ratsSprite.pause(ratsCakeAndIcecream)
 
-    ratsSuchAGoodBoy.play()
-    ratsSuchAGoodBoy.pause()
+    ratsSuchAGoodBoy = ratsSprite.play('ratsSuchAGoodBoy')
+    ratsSprite.pause(ratsSuchAGoodBoy)
 
+    // Start it off
+    ratsSprite.mute(false)
+    ratsSprite.play(ratsIntro)
     ratsButton.innerHTML = 'loading...'
     ratsButton.disabled = true
-  })
 
-  ratsIntro.addEventListener('playing', function () {
-    ratsButton.style.display = 'none'
-  })
+    ratsSprite.on('play', function () {
+      ratsButton.style.display = 'none'
+    }, ratsIntro)
 
-  ratsIntro.addEventListener('ended', function () {
-    sayRatsName()
-  })
+    ratsSprite.on('end', function () {
+      sayRatsName()
+    }, ratsIntro)
 
-  ratsName.addEventListener('ended', handleRatsNameEnd)
+    ratsSprite.on('end', function () {
+      handleRatsNameEnd()
+    }, ratsName)
 
-  ratsCakeAndIcecream.addEventListener('ended', function () {
-    sayRatsName()
-  })
+    ratsSprite.on('end', function () {
+      sayRatsName()
+    }, ratsCakeAndIcecream)
 
-  ratsSuchAGoodBoy.addEventListener('ended', function () {
-    ratsIntro.play()
+    ratsSprite.on('end', function () {
+      // Start a bit at the start to get it on beat.
+      ratsSprite.seek(0.3, ratsIntro)
+      ratsSprite.play(ratsIntro)
+    }, ratsSuchAGoodBoy)
   })
 
   setName()
@@ -178,9 +195,9 @@
 
   function handleRatsNameEnd () {
     if (firstTry) {
-      ratsCakeAndIcecream.play()
+      ratsSprite.play(ratsCakeAndIcecream)
     } else {
-      ratsSuchAGoodBoy.play()
+      ratsSprite.play(ratsSuchAGoodBoy)
     }
 
     firstTry = !firstTry
@@ -212,8 +229,7 @@
 
   function sayRatsName () {
     if (name === DEFAULT_NAME || !hasSpeechSupport || !nameToSay || speechHasErrored) {
-      ratsName.play()
-      return
+      return ratsSprite.play(ratsName)
     }
     setNameToSay()
     window.speechSynthesis.speak(nameToSay)
