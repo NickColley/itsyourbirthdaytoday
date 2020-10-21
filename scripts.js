@@ -233,8 +233,8 @@
       voice = search('Fred (en-US)', voices)
     } else if (search('English United States (en_US)', voices) !== false) { // android
       voice = search('English United States (en_US)', voices)
-    } else if (search('English (America) (en_US)', voices) !== false) { // ubuntu
-      voice = search('English (America) (en_US)', voices)
+    } else if (search('English (America) (en-US)', voices) !== false) { // ubuntu
+      voice = search('English (America) (en-US)', voices)
     }
     nameToSay.voice = voice
 
