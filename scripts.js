@@ -224,14 +224,17 @@
     nameToSay.pitch = 0.8
     nameToSay.rate = 1.25
     nameToSay.lang = 'en-US'
+    var voices = window.speechSynthesis.getVoices()
     var voice
     // forgive me for i have sinned
-    if (search('Microsoft David Desktop - English (United States)', window.speechSynthesis.getVoices()) !== false) { // windows
-      voice = search('Microsoft David Desktop - English (United States)', window.speechSynthesis.getVoices())
-    } else if (search('Fred (en-US)', window.speechSynthesis.getVoices()) !== false) { // ios
-      voice = search('Fred (en-US)', window.speechSynthesis.getVoices())
-    } else if (search('English United States (en_US)', window.speechSynthesis.getVoices()) !== false) { // android
-      voice = search('English United States (en_US)', window.speechSynthesis.getVoices())
+    if (search('Microsoft David Desktop - English (United States)', voices) !== false) { // windows
+      voice = search('Microsoft David Desktop - English (United States)', voices)
+    } else if (search('Fred (en-US)', voices) !== false) { // ios
+      voice = search('Fred (en-US)', voices)
+    } else if (search('English United States (en_US)', voices) !== false) { // android
+      voice = search('English United States (en_US)', voices)
+    } else if (search('English (America) (en_US)', voices) !== false) { // ubuntu
+      voice = search('English (America) (en_US)', voices)
     }
     nameToSay.voice = voice
 
