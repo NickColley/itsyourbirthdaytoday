@@ -118,9 +118,6 @@
       ratsSuchAGoodBoy: [12200, 3709]
     }
   })
-  var ratsInstrumental = new window.Howl({
-    src: ['ratsInstrumental.wav']
-  })
 
   var ratsInput = document.querySelector('input')
   var ratsButton = document.querySelector('button')
@@ -243,7 +240,6 @@
       return ratsSprite.play(ratsName)
     }
     setNameToSay()
-    ratsInstrumental.play()
     window.speechSynthesis.speak(nameToSay)
     // If the speech api times out, then fallback to the regular sound.
     setTimeout(function () {
