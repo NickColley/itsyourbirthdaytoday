@@ -1,13 +1,10 @@
 // on load
 (function () {
   /*
-
     Warning. There is a list of blocked words in this document.
     This is to curb any abuse of the site. Or at least try.
     If it doesn't work I'll delete it.
-
     They're lots of slurs, if you'd prefer not read this leave now.
-
   */
   //
   //
@@ -81,7 +78,7 @@
       }, delay)
     }
   }
-
+  var syllable = require('syllable')
   function removeBlockedWords (text) {
     var foundBlockedText = false
 
@@ -115,11 +112,14 @@
   var ratsSprite = new window.Howl({
     src: ['rats.mp3'],
     sprite: {
-      ratsIntro: [0, 7600],
+      ratsIntro: [0, (7354 + 219)],
       ratsName: [7600, 550],
-      ratsCakeAndIcecream: [8150, 3600],
-      ratsSuchAGoodBoy: [12200, (3700 - 250)]
+      ratsCakeAndIcecream: [8150, (3357 + 180)],
+      ratsSuchAGoodBoy: [12200, 3709]
     }
+  })
+  var ratsInstrumental = new window.Howl({
+    src: ['ratsInstrumental.wav']
   })
 
   var ratsInput = document.querySelector('input')
@@ -175,6 +175,8 @@
     }, ratsSuchAGoodBoy)
   })
 
+  var syllablesProcessed = 0
+  var totalSyllables
   setName()
   setNameToSay()
 
@@ -202,8 +204,8 @@
 
     firstTry = !firstTry
   }
-
   function setNameToSay () {
+    totalSyllables = syllable(name)
     if (!hasSpeechSupport) {
       return
     }
@@ -217,7 +219,7 @@
       speechHasStarted = true
     }
     nameToSay.onend = function () {
-      if (!speechHasErrored) {
+      if (!speechHasErrored && !handled) {
         handleRatsNameEnd()
       }
     }
@@ -225,13 +227,23 @@
       speechHasErrored = true
       sayRatsName()
     }
+    var handled = false
+    nameToSay.onboundary = function () {
+      syllablesProcessed++
+      if (!speechHasErrored && syllablesProcessed === (totalSyllables) && handled === false) {
+        setTimeout(function () { handleRatsNameEnd() }, 330)
+        handled = true
+      }
+    }
   }
 
   function sayRatsName () {
+    syllablesProcessed = 0
     if (name === DEFAULT_NAME || !hasSpeechSupport || !nameToSay || speechHasErrored) {
       return ratsSprite.play(ratsName)
     }
     setNameToSay()
+    ratsInstrumental.play()
     window.speechSynthesis.speak(nameToSay)
     // If the speech api times out, then fallback to the regular sound.
     setTimeout(function () {
