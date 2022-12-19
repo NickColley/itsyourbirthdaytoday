@@ -28,7 +28,7 @@
   "dependencies": {
     "clean-css-cli": "^4.1.10",
     "npm-watch": "^0.3.0",
-    "serve": "^10.1.2",
+    "serve": "^14.1.2",
     "terser": "^5.12.0"
   }
 }
