@@ -196,6 +196,10 @@
     ratsSprite.mute(shouldMute);
     muteButton.textContent = shouldMute ? "un" + originalMuteLabel : originalMuteLabel;
   });
+  // Mute the audio the the user leaves the tab.
+  document.addEventListener("visibilitychange", () => {
+    ratsSprite.mute(document.hidden);
+  });
 
   // Allow turning off animations manually.
   function handleReduceMotion (shouldReduce) {
