@@ -94,6 +94,7 @@
 
   const inputName = document.querySelector("#input-name");
   const inputIdentity = document.querySelector("#input-identity");
+  const animation = document.querySelector(".video");
   const playButton = document.querySelector("button");
   const customiseDetails = document.querySelector("details");
 
@@ -187,6 +188,7 @@
   const ratsSpriteParts = {};
 
   playButton.addEventListener("click", function () {
+    animation.classList.remove("video-hidden");
     ratsSprite.mute(true);
 
     // Play and pause sprites so we can get their IDs.

@@ -18,10 +18,11 @@ html,
 body {
   width: 100%;
   height: 100%;
+  background: black;
 }
 
 .video {
-  z-index: -100;
+  z-index: 1;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -32,22 +33,31 @@ body {
   transform: translateX(-50%) translateY(-50%);
 }
 
-@media (max-width: 450px) {
+.video-hidden {
+  opacity: 0.005;
+}
+
+@media (orientation: portrait) and (prefers-reduced-motion: no-preference) {
   .video {
-    animation: videoMove 10s ease-in-out infinite;
+    animation: videoMove 8s steps(2) infinite alternate;
   }
 }
 
 @keyframes videoMove {
-  25% {
+  0% {
     transform: translateX(-25%) translateY(-50%);
   }
-  75% {
-    transform: translateX(-75%) translateY(-50%);
+  50% {
+    transform: translateX(-35%) translateY(-50%);
+  }
+  100% {
+    transform: translateX(-45%) translateY(-50%);
   }
 }
 
 details {
+  z-index: 2;
+  position: fixed;
   padding: 1em;
 }
 
@@ -97,7 +107,7 @@ label {
 }
 
 button {
-  z-index: 200;
+  z-index: 3;
   position: absolute;
   top: 0%;
   bottom: 0%;
@@ -146,6 +156,7 @@ button:active {
 }
 
 .links {
+  z-index: 2;
   position: fixed;
   margin: 0;
   list-style: none;
