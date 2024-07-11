@@ -190,15 +190,18 @@
   const ratsSpriteParts = {};
 
   // Allow muting audio.
+  let isMuted = false;
   const originalMuteLabel = muteButton.textContent;
   muteButton.addEventListener("click", function () {
-    const shouldMute = muteButton.textContent === originalMuteLabel;
-    ratsSprite.mute(shouldMute);
-    muteButton.textContent = shouldMute ? "un" + originalMuteLabel : originalMuteLabel;
+    isMuted = !isMuted;
+    ratsSprite.mute(isMuted);
+    muteButton.textContent = isMuted ? "un" + originalMuteLabel : originalMuteLabel;
   });
   // Mute the audio the the user leaves the tab.
   document.addEventListener("visibilitychange", () => {
-    ratsSprite.mute(document.hidden);
+    if (!isMuted) {
+      ratsSprite.mute(document.hidden);
+    }
   });
 
   // Allow turning off animations manually.
@@ -280,6 +283,8 @@
     if (state.name === DEFAULT_NAME) {
       return ratsSprite.play(ratsSpriteParts.name);
     }
+
+    console.log(ratsSpriteParts.name);
 
     textToSpeech(state.nameSpeechSynthesis)
       // if it errors fallback to default
