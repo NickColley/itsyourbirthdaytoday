@@ -214,7 +214,6 @@
   }
 
   const reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-  handleReduceMotion(reduceMotionQuery.matches);
   reduceMotionQuery.addEventListener("change", ({ matches }) => {
     handleReduceMotion(matches);
   });
@@ -223,7 +222,7 @@
   });
 
   playButton.addEventListener("click", function () {
-    animation.classList.remove("video-hidden");
+    handleReduceMotion(reduceMotionQuery.matches);
     ratsSprite.mute(true);
 
     // Play and pause sprites so we can get their IDs.

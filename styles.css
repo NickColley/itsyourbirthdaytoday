@@ -33,10 +33,6 @@ body {
   transform: translateX(-50%) translateY(-50%);
 }
 
-.video-hidden {
-  opacity: 0.005;
-}
-
 @media (orientation: portrait) {
   body:not(.prefers-reduced-motion) .video {
     animation: videoMove 8s steps(2) infinite alternate;
