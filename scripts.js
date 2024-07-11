@@ -118,6 +118,7 @@
   );
 
   const state = {
+    isMuted: null,
     name,
     nameSpeechSynthesis: createSpeechSynthesis(name),
     identity,
@@ -190,16 +191,16 @@
   const ratsSpriteParts = {};
 
   // Allow muting audio.
-  let isMuted = false;
   const originalMuteLabel = muteButton.textContent;
   muteButton.addEventListener("click", function () {
-    isMuted = !isMuted;
-    ratsSprite.mute(isMuted);
-    muteButton.textContent = isMuted ? "un" + originalMuteLabel : originalMuteLabel;
+    state.isMuted = !state.isMuted;
+    ratsSprite.mute(state.isMuted);
+    muteButton.textContent = state.isMuted ? "un" + originalMuteLabel : originalMuteLabel;
   });
   // Mute the audio the the user leaves the tab.
   document.addEventListener("visibilitychange", () => {
-    if (!isMuted) {
+    console.log(state.isMuted);
+    if (state.isMuted === null) {
       ratsSprite.mute(document.hidden);
     }
   });
@@ -280,11 +281,9 @@
   }
 
   function playName() {
-    if (state.name === DEFAULT_NAME) {
+    if (state.isMuted || state.name === DEFAULT_NAME) {
       return ratsSprite.play(ratsSpriteParts.name);
     }
-
-    console.log(ratsSpriteParts.name);
 
     textToSpeech(state.nameSpeechSynthesis)
       // if it errors fallback to default
@@ -297,7 +296,7 @@
   }
 
   function playIdentity() {
-    if (state.identity === DEFAULT_IDENTITY) {
+    if (state.isMuted || state.identity === DEFAULT_IDENTITY) {
       return ratsSprite.play(ratsSpriteParts.boy);
     }
 
