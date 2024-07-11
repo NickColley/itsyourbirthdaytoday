@@ -72,7 +72,7 @@ details[open] summary {
 }
 
 details[open] summary::before {
-  content: "Stop ";
+  content: "Hide ";
 }
 
 .input-wrapper {

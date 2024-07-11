@@ -31,11 +31,18 @@
         </form>
       </details>
 
-      <img
-        class="video"
-        src="rats.gif"
-        alt="Family dancing to son's happy birthday song"
-      />
+      <picture>
+        <source
+          srcset="rats.gif"
+          type="image/gif"
+          media="(prefers-reduced-motion: no-preference)"
+        />
+        <img
+          class="video"
+          src="rats-no-motion.gif"
+          alt="Family dancing to son's happy birthday song"
+        />
+      </picture>
 
       <ul class="links">
         <li class="button">
