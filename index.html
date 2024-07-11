@@ -9,7 +9,7 @@
   </head>
   <body>
     <main>
-      <button>press to play your birthday message</button>
+      <button id="play" type="button">press to play your birthday message</button>
 
       <details>
         <summary class="button">customisation</summary>
@@ -31,18 +31,16 @@
         </form>
       </details>
 
-      <picture>
-        <source
-          srcset="rats.gif"
-          type="image/gif"
-          media="(prefers-reduced-motion: no-preference)"
-        />
-        <img
-          class="video video-hidden"
-          src="rats-no-motion.gif"
-          alt="Family dancing to son's happy birthday song"
-        />
-      </picture>
+      <img
+        class="video video-hidden"
+        src="rats-no-motion.gif"
+        alt="Family dancing to son's happy birthday song"
+      />
+
+      <div class="controls">
+        <button id="mute" class="button" type="button">mute</button>
+        <button id="reduce-motion" class="button" type="button">animation</button>
+      </div>
 
       <ul class="links">
         <li class="button">

@@ -95,7 +95,9 @@
   const inputName = document.querySelector("#input-name");
   const inputIdentity = document.querySelector("#input-identity");
   const animation = document.querySelector(".video");
-  const playButton = document.querySelector("button");
+  const playButton = document.querySelector("#play");
+  const muteButton = document.querySelector("#mute");
+  const reduceMotionButton = document.querySelector("#reduce-motion");
   const customiseDetails = document.querySelector("details");
 
   // if we click off details element, close it
@@ -186,6 +188,35 @@
     sprite: ratsSpriteOptions,
   });
   const ratsSpriteParts = {};
+
+  // Allow muting audio.
+  const originalMuteLabel = muteButton.textContent;
+  muteButton.addEventListener("click", function () {
+    const shouldMute = muteButton.textContent === originalMuteLabel;
+    ratsSprite.mute(shouldMute);
+    muteButton.textContent = shouldMute ? "un" + originalMuteLabel : originalMuteLabel;
+  });
+
+  // Allow turning off animations manually.
+  function handleReduceMotion (shouldReduce) {
+    document.body.classList.toggle("prefers-reduced-motion", shouldReduce);
+    if (shouldReduce) {
+      reduceMotionButton.dataset.pressed = "true";
+      animation.src ="rats-no-motion.gif";
+    } else  {
+      reduceMotionButton.dataset.pressed = "false";
+      animation.src ="rats.gif";
+    }
+  }
+
+  const reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  handleReduceMotion(reduceMotionQuery.matches);
+  reduceMotionQuery.addEventListener("change", ({ matches }) => {
+    handleReduceMotion(matches);
+  });
+  reduceMotionButton.addEventListener("click", function () {
+    handleReduceMotion(reduceMotionButton.dataset.pressed === "false");
+  });
 
   playButton.addEventListener("click", function () {
     animation.classList.remove("video-hidden");
